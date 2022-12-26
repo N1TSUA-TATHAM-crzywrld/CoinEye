@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <title>Spare Change Counter</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <center>
+                <h1 class="text-success">
+                </h1>
+            </center>
+            <ul class="nav nav-pills text-center rounded-pill" style="background-color:black;font-weight: bold;
+            color: aqua;margin-bottom: 10%; margin-left: 5%;margin-right: 5%; margin-bottom: 10%;">
+                <li class="active"><a href="#" style="margin-left: 80%;">Home</a></li>
+                <li><a href="#" style="margin-left:120%;">Guidelines</a></li>
+                <li><a href="#" style="margin-left: 280%;">Contact</a></li>
+                <li><a href="static/model_viewer.png" style="margin-left: 480%; min-zoom: 50%;">Model</a></li>
+            </ul>
+        </div>
+
+    <Body>
+        <style>
+        body{
+            background-image: 
+        url('/static/Hnd_Drn_Back.jpg');
+            background-size: cover; margin-top: 13%;
+        }
+        </style>
+        
+        <h1 class="text-center rounded-pill" style="color:yellow;font-size:60px ;background-color:black;
+        border-style:ridge ;background-size:65px ;margin-left:10% ;margin-right:10% ;margin-bottom:5%;" >CoinCounter</h1>
+
+        <form class="ps-3 text-center" action="/", method="post" enctype="multipart/form-data" style="text-shadow: fuchsia;">
+            <input class="form-control" type="file" name="img_file" style="box-shadow:inset;font-size:20px; ">
+            <input class="btn btn-warning mt-3" style="size:4px ;" type="submit" value="Get Amount ----> $$$">
+        </form>
+
+        {% if output %}
+            <p class="text-center rounded-pill" style="font-size: xx-large;color: cyan;
+            font-weight: bold;background-color: rgb(43, 43, 43);margin-top: 4%;margin-left: 8%;margin-right: 8%;"
+            > Spare change amount is ${{output}}</p>
+        {% endif %}
+    </body>
+</html>
+
+        
+        

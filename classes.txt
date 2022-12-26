@@ -1,0 +1,4 @@
+Dime
+Nickel
+Penny
+Quarter
