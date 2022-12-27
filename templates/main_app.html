@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <html>
-    
+<meta name = "viewport"
+content = "width = device-width, initial-scale = 1.0">
+
     <head>
         <title>Spare Change Counter</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.css">
@@ -13,30 +15,34 @@
                 <h1 class="text-success">
                 </h1>
             </center>
-            <ul class="nav nav-pills text-center rounded-pill" style="background-color:black;font-weight: bold;
-            color: aqua;margin-bottom: 10%; margin-left: 5%;margin-right: 5%; margin-bottom: 10%;">
-                <li class="active"><a href="#" style="margin-left: 80%;">Home</a></li>
-                <li><a href="#" style="margin-left:120%;">Guidelines</a></li>
-                <li><a href="#" style="margin-left: 280%;">Contact</a></li>
-                <li><a href="static/model_viewer.png" style="margin-left: 480%; min-zoom: 50%;">Model</a></li>
-            </ul>
+            <nav class="nav nav-pills nav-fill rounded-pill" style="background-color:black;font-weight: bold;
+            color: rgb(255, 255, 0);margin-bottom: 10%; margin-left: 5%;margin-right: 5%; margin-bottom: 10%;
+            size:15%;contain:content;padding:10px;">
+                <a class="nav-item -nav-link"style="font-size:20px;" href="#">Home</a>
+                <a class="nav-item nav-link"style="font-size:20px;" href="#">Guidelines</a>
+                <a class="nav-item nav-link"style="font-size:20px;" href="#">Contact</a>
+                <a class="nav-item nav-link"style="font-size:20px;" href="static/model_viewer.png">Model</a>
+            </nav>
         </div>
 
     <Body>
         <style>
         body{
-            background-image: 
-        url('/static/Hnd_Drn_Back.jpg');
+            background-image:
+        url('/static/Bckgrd1.jpg');
             background-size: cover; margin-top: 13%;
+            background-repeat:no-repeat;
         }
         </style>
-        
+
         <h1 class="text-center rounded-pill" style="color:yellow;font-size:60px ;background-color:black;
-        border-style:ridge ;background-size:65px ;margin-left:10% ;margin-right:10% ;margin-bottom:5%;" >CoinCounter</h1>
+        border-style:ridge ;background-size:65px ;margin-left:10% ;margin-right:10% ;
+        margin-bottom:5%;padding:15px;" >ChangeCounter</h1>
 
         <form class="ps-3 text-center" action="/", method="post" enctype="multipart/form-data" style="text-shadow: fuchsia;">
             <input class="form-control" type="file" name="img_file" style="box-shadow:inset;font-size:20px; ">
-            <input class="btn btn-warning mt-3" style="size:4px ;" type="submit" value="Get Amount ----> $$$">
+            <input class="btn btn-warning mt-3" style="size:16px ;margin-top:10%;
+            padding:8px;" type="submit" value="Get Amount ----> $$$">
         </form>
 
         {% if output %}
@@ -47,5 +53,4 @@
     </body>
 </html>
 
-        
-        
+
