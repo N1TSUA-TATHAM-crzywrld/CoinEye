@@ -136,10 +136,12 @@ def Final_Predictions():
         cv2.putText(frames, class_list[classid], (box[0], box[1] - 1), cv2.FONT_HERSHEY_SIMPLEX, .3, (0,0,0), 1)
         y = list(confidences)
         inferance = zip(y, detection_amount)
+    
     quarter = 0
     dime = 0
     nickel = 0
     penny = 0
+    
     for coin in detection_amount:
         if coin == 'Penny':
             penny += 0.01
