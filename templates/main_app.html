@@ -1,56 +1,152 @@
 <!DOCTYPE html>
 
 <html>
-<meta name = "viewport"
-content = "width = device-width, initial-scale = 1.0">
+
 
     <head>
         <title>Spare Change Counter</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.css">
-    </head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/futura-font@1.0.0/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js">
+        <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js">
+        <meta name = "viewport"content = "width = device-width, initial-scale = 1">
 
-    <body>
-        <div class="container">
-            <center>
-                <h1 class="text-success">
-                </h1>
-            </center>
-            <nav class="nav nav-pills nav-fill rounded-pill" style="background-color:black;font-weight: bold;
-            color: rgb(255, 255, 0);margin-bottom: 10%; margin-left: 5%;margin-right: 5%; margin-bottom: 10%;
-            size:15%;contain:content;padding:10px;">
-                <a class="nav-item -nav-link"style="font-size:20px;" href="#">Home</a>
-                <a class="nav-item nav-link"style="font-size:20px;" href="#">Guidelines</a>
-                <a class="nav-item nav-link"style="font-size:20px;" href="#">Contact</a>
-                <a class="nav-item nav-link"style="font-size:20px;" href="static/model_viewer.png">Model</a>
-            </nav>
-        </div>
 
-    <Body>
-        <style>
-        body{
-            background-image:
-        url('/static/Bckgrd1.jpg');
-            background-size: cover; margin-top: 13%;
-            background-repeat:no-repeat;
-        }
-        </style>
+<style>
 
-        <h1 class="text-center rounded-pill" style="color:yellow;font-size:60px ;background-color:black;
-        border-style:ridge ;background-size:65px ;margin-left:10% ;margin-right:10% ;
-        margin-bottom:5%;padding:15px;" >ChangeCounter</h1>
+body{background-color: black;
+    background-size: cover;
+    font-family: Verdana, Helvetica, sans-serif;
+    margin-top:5px;
+    margin-bottom:4px;
 
-        <form class="ps-3 text-center" action="/", method="post" enctype="multipart/form-data" style="text-shadow: fuchsia;">
-            <input class="form-control" type="file" name="img_file" style="box-shadow:inset;font-size:20px; ">
-            <input class="btn btn-warning mt-3" style="size:16px ;margin-top:10%;
-            padding:8px;" type="submit" value="Get Amount ----> $$$">
+}
+
+    .topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: gray;
+  color: black;
+  font-weight: bold;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: center;
+  }
+
+</style>
+</head>
+
+     <body>
+
+        <div class="topnav nav-fill" style="margin-bottom:3%;" id="myTopnav">
+  <a href="#home" class="active">Home</a>
+  <a href="https://github.com/N1TSUA-TATHAM-crzywrld/ChangeCounter.git">CodeBase</a>
+  <a href="#contact">Contact</a>
+  <a href="static/model_viewer.png">Model</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+<Body>
+
+    <!---<div>
+    <img src = "/static/Photo_1673841812649.png"
+    style = "width: 200px; height: 200px;
+    margin: auto; display: block;">
+    </div>--->
+
+        <!---<h1 class="text-center rounded-pill" style="color:yellow;font-size:39px ;background-color:black;
+        border-style:ridge ;contain:content ;margin-left:5% ;margin-right:5% ;font:FuturaBT-Medium;
+        margin-bottom:3%;padding:12px;" >CoinEye</h1>--->
+
+        <form class="ps-3 text-center" action="/", method="post" enctype="multipart/form-data" id="RootForm" style="text-shadow: fuchsia;">
+            <input class="form-control" type="file" name="img_file" style="box-shadow:inset;font-size:17px;margin-right:2%; "
+            id="FormSubmit" onclick="Submission()">
+            <button class="btn btn-warning mt-3" style="size:14% ;margin-top:12%;
+            padding:3px;" type="submit" id="SubmitButton" onclick="updateButton()"
+            >Get Amount ----> $$$</button>
         </form>
 
-        {% if output %}
-            <p class="text-center rounded-pill" style="font-size: xx-large;color: cyan;
-            font-weight: bold;background-color: rgb(43, 43, 43);margin-top: 4%;margin-left: 8%;margin-right: 8%;"
-            > Spare change amount is ${{output}}</p>
-        {% endif %}
-    </body>
+            {% if output %}
+            <p class="text-center rounded-pill" style="font-size: 17px;color: black;
+            font-weight: bold;background-color: rgb(43, 43, 43);margin-left: 8%;
+            margin-right: 8%;margin-top: 7%;" id="SumValue"
+            >Spare change amount is ${{output}}</p>
+            {% endif %}
+            </Body>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+<!---<script type="text/javascript">
+function updateButton() {
+    var x = document.getElementById("SubmitButton");
+    var y = document.getElementById("SumValue");
+    if (x.className === "btn") {
+        y.value = "Spare change ammount is $" + "{{output}}";
+    }   else {
+        y.value = "Sorry There Was An Error";--->
+
+<script>
+function Submission() {
+    var n = document.getElementById("FormSubmit");
+    if (n.className === "form-control") {
+        n.submit();
+    }
+}
+</script>
+</body>
 </html>
 
 
