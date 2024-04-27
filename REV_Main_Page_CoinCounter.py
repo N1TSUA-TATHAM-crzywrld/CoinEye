@@ -10,15 +10,15 @@ import datetime
 
 #Continuous_10-19_
 def build_model(valid):
-    net = cv2.dnn.readNet("/home/atatham45/ChangeCounter/hopefully.onnx")
+    net = cv2.dnn.readNet("/home/atatham45/ChangeCounter/3-19-23_CoinEye.onnx")
     if valid:
         print("Running on CPU")
         net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
         net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
     return net
 
-INPUT_WIDTH = 864
-INPUT_HEIGHT = 864
+INPUT_WIDTH = 640
+INPUT_HEIGHT = 640
 SCORE_THRESHOLD = 0.2
 NMS_THRESHOLD = 0.4
 CONFIDENCE_THRESHOLD = 0.8
@@ -31,7 +31,7 @@ def detect(image, net):
 
 def load_capture(img):
         final_img = cv2.imread(img)
-        final_capture = cv2.resize(final_img,(864, 864))
+        final_capture = cv2.resize(final_img,(640, 640))
         return final_capture
 
 def load_classes():
@@ -130,12 +130,12 @@ def Final_Predictions():
     detection_amount = []
     class_ids, confidences, boxes = finalize_detections(inputImage, outs[0])
     for (classid, confidence, box) in zip(class_ids, confidences, boxes):
-        detection_amount.append(class_list[classid])
         color = colors[int(classid) % len(colors)]
         cv2.rectangle(frames, box, color, 1)
         cv2.rectangle(frames, (box[0], box[1] - 10), (box[0] + box[2], box[1]), color, -1)
-        cv2.putText(frames, class_list[classid], (box[0], box[1] - 1), cv2.FONT_HERSHEY_SIMPLEX, .3, (0,0,0), 1)
+        cv2.putText(frames, class_list[classid], (box[0], box[1] - 1), cv2.FONT_HERSHEY_SIMPLEX, .3, (255,255,255))
         y = list(confidences)
+        detection_amount.append(class_list[classid])
         inferance = zip(y, detection_amount)
 
     quarter = 0
@@ -166,14 +166,16 @@ def Final_Predictions():
     MaxLength = (arr)
     output = (MaxLength[0:5])
     FinalSum = ("".join(output))
-    
-    
+    #FinalSum = len(detection_amount)
+
+
+
+
     return render_template('main_app.html', output = FinalSum, img_results = image_results)
+
+@app.route('/contact', methods=['GET'])
+def Contact():
+    return render_template('Contact.html')
 
 #if __name__ == '__main__':
     #app.run(host='0.0.0.0', debug=True)
-
-
-
-
-
